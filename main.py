@@ -1,6 +1,6 @@
 from hotel import hotel
 
-hotel1 = hotel(nome="Hilton Palace", cnpj="27.638.554.0001-68", endereco="Rua Tangará, 17", telefone="32302750")
+hotel = hotel(nome="Darkside Hotel", cnpj="27.638.554.0001-68", endereco="Avenida Literária, 737, Bairro: Bookside", telefone="40028922")
 
 while True:
   menu = input("""
@@ -12,6 +12,7 @@ while True:
   4 - Sair
 ===========================
 """)
+  
   match menu:
     case "1":
       while True:
@@ -24,105 +25,76 @@ while True:
   4 - Excluir cadastro de cliente
   0 - Voltar ao menu principal
 """)
-  match menu_clientes:
-    case "1":
+        match menu_clientes:
+          case "1":
+            hotel.cadastrar_cliente()
+          case "2":
+            hotel.listar_clientes()
+          case "3":
+            hotel.editar_cliente()
+          case "4":
+            hotel.excluir_cliente()
+          case "0":
+            break
+          case _:
+            print("Opção inválida")
 
-
-
-class cliente:
-    def __init__(self, nome, telefone, email, id_unico):
-        self.nome = nome
-        self.telefone = telefone
-        self.email = email
-        self.id_unico = id_unico
-
-
-
-
-from cliente import cliente
-from quarto import quarto
-
-class hotel:
-  def __init__(self, nome: str, endereco: str, cnpj: str, telefone: str):
-    self.nome = nome
-    self.endereco = endereco
-    self.cnpj = cnpj
-    self.telefone = telefone
-    self.lista_de_clientes = []
-    self.lista_de_quartos = []
-    self.numero_de_reservas = 0
-    self.id_unico_cliente = 1
-
-#CLIENTES
-  def cadastrar_cliente(self):
-    nome = input("Digite o nome do cliente: ")
-    telefone = input("Digite o telefone do cliente: ")
-    email = input("Digite o email do cliente: ")
-    novo_cliente = cliente(id_unico=self.id_unico_cliente, nome=nome, telefone=telefone, email=email)
-    self.id_unico_cliente += 1
-    self.lista_de_clientes.append(novo_cliente)
-    print("Cliente cadastrado com sucesso!")
-
-  def listar_clientes(self):
-    for element in self.lista_de_clientes:
-      print(f"""
-      *********************************
-      INFORMAÇÕES DO CLIENTE
-      Id de cadastro: {element.id_unico_cliente}
-      Nome: {element.nome}
-      E-mail: {element.email}
-      Contato: {element.telefone}
-
-      *********************************
+    case "2":
+       while True:
+        menu_quartos = input("""
+==============================
+      MENU DOS QUARTOS
+  1 - Cadastrar Quarto
+  2 - Listar todos os quartos
+  3 - Editar quarto
+  4 - Verificar Disponibilidade
+  0 - Voltar ao menu principal
+==============================
 """)
-  def editar_clientes(self):
-    ...
-  def excluir_cliente(self):
-    ...
+        match menu_quartos:
+          case "1":
+            hotel.cadastrar_quarto()
+          case "2":
+            hotel.listar_quartos()
+          case "3":
+            hotel.editar_quarto()
+          case "4":
+            hotel.verificar_disponibilidade()
+          case "0":
+            break
+          case _:
+            print("Opção inválida")
 
 
-#RESERVAS
-  def listar_reservas(self):
-    ...
-  def criar_reserva(self):
-    ...
-  def editar_reserva(self):
-    ...
-  def verificar_disponibilidade(self):
-    ...
+    case "3":
+        while True:
+          menu_reservas = input("""
+==============================
+      MENU DAS RESERVAS
+  1 - Cadastrar Reserva
+  2 - Listar todas as reservas
+  3 - Editar reserva
+  4 - Cancelar reserva
+  0 - Voltar ao menu principal
+==============================
+""")
+          match menu_reservas:
+            case "1":
+              hotel.cadastrar_reserva()
+            case "2":
+              hotel.listar_reservas()
+            case "3":
+              hotel.editar_reserva()
+            case "4":
+              hotel.cancelar_reserva()
+            case "0":
+              break
+            case _:
+              print("Opção inválida")
 
-#QUARTOS
-  def cadastrar_quarto(self):
-    ...
-  def listar_quartos(self):
-    ...
-  def editar_quarto(self):
-    ...
-  def excluir_quarto(self):
-    ...
+    case "4":
+            print("Encerrando o sistema...")
+            break
 
-
-
-
-
-class quarto():
-  def __init__(self, numero_quarto: int, tipo_quarto: str, preco_diaria: float):
-    self.numero_quarto = numero_quarto
-    self.tipo_quarto = tipo_quarto
-    self.preco_diaria = preco_diaria
-    self.disponibilidade = True
-
-
-
-from cliente import cliente
-from quarto import quarto
-
-class reserva:
-  def __init__(self, cliente: cliente, quarto: quarto, data_checkin: str, data_checkout: str):
-    self.cliente = cliente
-    self.quarto = quarto
-    self.data_checkin = data_checkin
-    self.data_checkout = data_checkout
-
-
-
+    case _:
+            print("Opção inválida!")
